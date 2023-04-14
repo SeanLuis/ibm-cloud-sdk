@@ -1,0 +1,30 @@
+{
+    "name": "sean-luis/ibm-php-sdk",
+    "description": "IBM Cloud SDK for PHP",
+    "type": "library",
+    "require": {
+        "php": ">=8.1",
+        "guzzlehttp/guzzle": "^7.5",
+        "symfony/yaml": "^6.2",
+        "symfony/dotenv": "^6.2",
+        "ext-yaml": "*",
+        "ext-fileinfo": "*",
+        "ext-curl": "*",
+        "ext-simplexml": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    },
+    "license": "Apache-2.0",
+    "autoload": {
+        "psr-4": {
+            "Sean\\IbmPhpSdk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sean Luis",
+            "email": "seanluis47@gmail.com"
+        }
+    ]
+}
