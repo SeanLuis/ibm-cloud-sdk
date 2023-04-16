@@ -31,7 +31,7 @@ instructions at https://getcomposer.org to install it.
 **Run the following command in your terminal to install the SDK:**
 
 ```CMD 
-composer require sean/ibm-php-sdk
+composer require sean-luis/ibm-php-sdk
 ```
 
 ### Setting
