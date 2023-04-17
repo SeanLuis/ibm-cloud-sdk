@@ -26,5 +26,10 @@
             "name": "Sean Luis",
             "email": "seanluis47@gmail.com"
         }
-    ]
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-main": "0.1.x-dev"
+        }
+    }
 }
