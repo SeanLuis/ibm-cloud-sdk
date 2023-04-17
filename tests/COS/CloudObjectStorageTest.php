@@ -28,7 +28,6 @@ class CloudObjectStorageTest extends TestCase
         // Create an instance of CloudObjectStorage
         $this->cos = new CloudObjectStorage(
             $token,
-            $credentials['cos']['api_key'],
             $credentials['cos']['instance_id'],
             $credentials['cos']['url']
         );

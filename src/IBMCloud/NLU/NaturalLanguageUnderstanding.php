@@ -19,13 +19,14 @@ class NaturalLanguageUnderstanding extends BaseService implements NaturalLanguag
     /**
      * Constructor for NaturalLanguageUnderstandingInterface.
      *
-     * @param string $apiKey IBM Cloud API key.
+     * @param string $token IBM Cloud API token.
      * @param string $url IBM Cloud service URL.
      * @param string $version IBM Cloud service version.
      */
-    public function __construct(string $apiKey, string $url, string $version)
+    public function __construct(string $token, string $url, string $version)
     {
-        parent::__construct(self::SERVICE_NAME, $apiKey, $url, $version);
+        parent::__construct(self::SERVICE_NAME, $url, $version);
+        $this->headers['Authorization'] = 'Bearer ' . $token;
     }
 
     /**
@@ -44,7 +45,8 @@ class NaturalLanguageUnderstanding extends BaseService implements NaturalLanguag
                 'json' => $data,
                 'headers' => [
                     'Content-Type' => 'application/json',
-                    'Accept' => 'application/json'
+                    'Accept' => 'application/json',
+                    ...$this->headers
                 ]
             ]);
             return $this->getBody($response, 'nlu');
@@ -64,7 +66,8 @@ class NaturalLanguageUnderstanding extends BaseService implements NaturalLanguag
             $response = $this->sendRequest('GET', 'nlu', $path, [
                 'headers' => [
                     'Content-Type' => 'application/json',
-                    'Accept' => 'application/json'
+                    'Accept' => 'application/json',
+                    ...$this->headers
                 ]
             ]);
             return $this->getBody($response, 'nlu');

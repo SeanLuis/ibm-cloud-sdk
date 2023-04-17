@@ -16,9 +16,9 @@ class CloudObjectStorage extends BaseService implements CloudObjectStorageInterf
      */
     const SERVICE_NAME = 'cos';
 
-    public function __construct($token, $apiKey, $resourceInstanceID, $url, $version = BaseService::DEFAULT_API_VERSION, $httpClient = null)
+    public function __construct($token, $resourceInstanceID, $url, $version = BaseService::DEFAULT_API_VERSION, $httpClient = null)
     {
-        parent::__construct(self::SERVICE_NAME, $apiKey, $url, $version, $httpClient);
+        parent::__construct(self::SERVICE_NAME, $url, $version, $httpClient);
 
         $this->headers['Authorization'] = 'Bearer ' . $token;
         $this->headers['ibm-service-instance-id'] = $resourceInstanceID;

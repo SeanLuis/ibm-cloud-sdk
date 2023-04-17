@@ -4,27 +4,30 @@ namespace NLU;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
+use Sean\IbmPhpSdk\IBMCloud\Auth\IamAuthenticator;
 use Sean\IbmPhpSdk\IBMCloud\Helpers\Config;
-use Sean\IbmPhpSdk\IBMCloud\NLU\AnalysisFeature;
-use Sean\IbmPhpSdk\IBMCloud\NLU\Model\Categories;
-use Sean\IbmPhpSdk\IBMCloud\NLU\Model\Emotion;
-use Sean\IbmPhpSdk\IBMCloud\NLU\Model\Keywords;
 use Sean\IbmPhpSdk\IBMCloud\NLU\NaturalLanguageUnderstanding;
 use Sean\IbmPhpSdk\IBMCloud\NLU\NLUFeaturesParams;
 
 class NaturalLanguageUnderstandingTest extends TestCase
 {
     private $nlu;
+    private $token;
 
     public function setUp(): void
     {
-        // Upload IBM Cloud credentials from a YAML file or ENV file
+        // Load IBM Cloud credentials from a YAML file
         $credentials = Config::getCredentials('ibm-cloud.yaml');
 
-        $apiKey = $credentials['nlu']['api_key'];
+        $authenticator = new IamAuthenticator($credentials['ibm']['api_key']);
+
+        $token = $authenticator->getAccessToken();
+        $this->token = $token;
+
         $url = $credentials['nlu']['url'];
         $version = '2022-04-07';
-        $this->nlu = new NaturalLanguageUnderstanding($apiKey, $url, $version);
+
+        $this->nlu = new NaturalLanguageUnderstanding($token, $url, $version);
     }
 
     public function testAnalyze()
