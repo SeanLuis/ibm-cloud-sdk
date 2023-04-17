@@ -12,14 +12,6 @@ use Psr\Http\Message\ResponseInterface;
 interface BaseServiceInterface
 {
     /**
-     * Sets the API key to use for authentication.
-     *
-     * @param string $apiKey The API key to use.
-     * @return void
-     */
-    public function setApiKey(string $apiKey): void;
-
-    /**
      * Sets the version of the IBM service API to use.
      *
      * @param string $version The version to use.

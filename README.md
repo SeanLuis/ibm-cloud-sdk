@@ -107,8 +107,12 @@ use IBMCloud\NLU\NaturalLanguageUnderstanding;
 // Load IBM Cloud credentials from a YAML file
 $credentials = Config::getCredentials('ibm-cloud.yaml');
 
+$authenticator = new IamAuthenticator($credentials['ibm']['api_key']);
+
+$token = $authenticator->getAccessToken();
+
 // Create an instance of NaturalLanguageUnderstanding
-$nlu = new NaturalLanguageUnderstanding($apiKey, $url, $version);
+$nlu = new NaturalLanguageUnderstanding($token, $url, $version);
 
 // Define the text to analyze
 $text = "I am very happy with the result of today's game.";
@@ -148,13 +152,13 @@ foreach ($response['keywords'] as $keyword) {
 
 > Creates a new instance of the Natural Language Understanding class.
 ```PHP
-new NaturalLanguageUnderstanding($apiKey, $url, $version)
+new NaturalLanguageUnderstanding($token, $url, $version)
 ```
 
 **Parameters:**
 
 ```
-$apiKey (string): The IBM NLU API key.
+$token (string): The IBM Cloud response token.
 $url (string): IBM NLU URL.
 $version (string): The version of IBM NLU.
 ```
@@ -198,13 +202,10 @@ $credentials = Config::getCredentials('ibm-cloud.yaml');
 $authenticator = new IamAuthenticator($credentials['ibm']['api_key']);
 
 $token = $authenticator->getAccessToken();
-        $this->token = $token;
-        $this->bucket = $credentials['cos']['bucket'];
 
 // Create an instance of CloudObjectStorage
 $this->cos = new CloudObjectStorage(
     $token,
-    $credentials['cos']['api_key'],
     $credentials['cos']['instance_id'],
     $credentials['cos']['url']
 );        
@@ -224,13 +225,13 @@ echo $response;
 
 > Creates a new instance of the CloudObjectStorage class.
 ```PHP
-new CloudObjectStorage($apiKey, $serviceInstanceId, $endpoint, $bucketName)
+new CloudObjectStorage($token, $serviceInstanceId, $endpoint, $bucketName)
 ```
 
 **Parameters:**
 
 ```
-$token (string): Token returned by the IBM COS API.
+$token (string): The IBM Cloud response token.
 $serviceInstanceId (string): The IBM COS service instance ID.
 $endpoint (string): The IBM COS endpoint.
 $bucketName (string): The name of the IBM COS bucket.
@@ -374,12 +375,10 @@ use IBMCloud\TTS\TextToSpeech;
 $credentials = Config::getCredentials('ibm-cloud.yaml');
 
 $token = $authenticator->getAccessToken();
-$this->token = $token;
 
 // Create an instance of TextToSpeech
 $tts = new TextToSpeech(
     $token,
-    $credentials['tts']['api_key'],
     $credentials['tts']['url']
 );
 
@@ -395,7 +394,7 @@ use Sean\IbmPhpSdk\IBMCloud\TTS\Enum\AcceptOptions;
 $accept = AcceptOptions::AUDIO_MP3;
 
 // Make the request to IBM TTS
-$audio = $this->textToSpeech->synthesize($text, $accept, $voice);
+$audio = $tts->synthesize($text, $accept, $voice);
 
 // Export the audio to a folder
 file_put_contents('./path/to/audio.mp3', $audio);
@@ -403,14 +402,13 @@ file_put_contents('./path/to/audio.mp3', $audio);
 
 > Creates a new instance of the Text To Speech class.
 ```PHP
-new TextToSpeech($token, $apiKey, $url)
+new TextToSpeech($token, $url)
 ```
 
 **Parameters:**
 
 ```
-$token (string): Token returned by the IBM COS API.
-$apiKey (string): The IBM TTS API key.
+$token (string): The IBM Cloud response token.
 $url (string): IBM TTS URL.
 $version (string): Service version, by deafault V1.
 ```
@@ -445,12 +443,10 @@ use IBMCloud\STT\SpeechToText;
 $credentials = Config::getCredentials('ibm-cloud.yaml');
 
 $token = $authenticator->getAccessToken();
-$this->token = $token;
 
 // Create an instance of TextToSpeech
 $sst = new SpeechToText(
     $token,
-    $credentials['stt']['api_key'],
     $credentials['stt']['url']
 );
 
@@ -476,14 +472,13 @@ echo $transcript;
 
 > Creates a new instance of the Speech To Text class.
 ```PHP
-new SpeechToText($token, $apiKey, $url)
+new SpeechToText($token, $url)
 ```
 
 **Parameters:**
 
 ```
-$token (string): Token returned by the IBM COS API.
-$apiKey (string): The IBM TTS API key.
+$token (string): The IBM Cloud response token.
 $url (string): IBM TTS URL.
 $version (string): Service version, by deafault V1.
 ```
