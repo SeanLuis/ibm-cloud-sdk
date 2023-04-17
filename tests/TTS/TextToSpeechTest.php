@@ -27,7 +27,6 @@ class TextToSpeechTest extends TestCase
 
         $this->textToSpeech = new TextToSpeech(
             $token,
-            $credentials['tts']['api_key'],
             $credentials['tts']['url']
         );
     }
