@@ -13,11 +13,11 @@ interface NaturalLanguageUnderstandingInterface
     /**
      * Constructor for NaturalLanguageUnderstandingInterface.
      *
-     * @param string $apiKey IBM Cloud API key.
+     * @param string $token IBM Cloud API token.
      * @param string $url IBM Cloud service URL.
      * @param string $version IBM Cloud service version.
      */
-    public function __construct(string $apiKey, string $url, string $version);
+    public function __construct(string $token, string $url, string $version);
 
     /**
      * Analyze text using IBM Cloud Natural Language Understanding service.

@@ -25,11 +25,6 @@ abstract class BaseService implements BaseServiceInterface
     protected string $name;
 
     /**
-     * The API key used to authenticate requests.
-     */
-    protected string $apiKey;
-
-    /**
      * The base URL for the service.
      */
     protected string $url;
@@ -48,26 +43,16 @@ abstract class BaseService implements BaseServiceInterface
      * BaseService constructor.
      *
      * @param string $name The service name.
-     * @param string $apiKey The API key to use for authentication.
      * @param string $url The URL of the IBM service.
      * @param string $version The version of the IBM service API to use.
      * @param Client|null $httpClient The HTTP client to use for requests.
      */
-    public function __construct(string $name, string $apiKey, string $url, string $version = self::DEFAULT_API_VERSION, Client $httpClient = null)
+    public function __construct(string $name, string $url, string $version = self::DEFAULT_API_VERSION, Client $httpClient = null)
     {
         $this->name = $name;
-        $this->apiKey = $apiKey;
         $this->url = $url;
         $this->version = $version;
         $this->httpClient = $httpClient ?: new Client();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setApiKey(string $apiKey): void
-    {
-        $this->apiKey = $apiKey;
     }
 
     /**
@@ -92,8 +77,6 @@ abstract class BaseService implements BaseServiceInterface
 
         switch ($resource) {
             case "nlu":
-            $headers['Authorization'] = 'Basic ' . base64_encode('apikey:' . $this->apiKey);
-                break;
             case "cos":
             case "tts":
             case "stt":
