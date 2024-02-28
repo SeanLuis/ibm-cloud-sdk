@@ -1,6 +1,21 @@
 {
     "name": "sean-luis/ibm-php-sdk",
     "description": "IBM Cloud SDK for PHP",
+    "keywords": [
+        "IBM Cloud Services",
+        "PHP SDK",
+        "Cloud Integration",
+        "API Client",
+        "IBM Watson",
+        "Cloud Computing",
+        "PHP Cloud Library",
+        "Enterprise Integration",
+        "GuzzleHTTP",
+        "Symfony Components",
+        "REST API Client",
+        "Cloud Development Tools",
+        "PHP Cloud SDK"
+    ],
     "type": "library",
     "require": {
         "php": ">=8.1",
